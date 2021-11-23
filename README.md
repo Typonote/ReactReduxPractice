@@ -1,70 +1,72 @@
-# Getting Started with Create React App
+# ReactReduxPractice
+상태관리 라이브러리인 Redux을 학습하기 위한 코드
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 💻 기술 스택
 
-## Available Scripts
+- HTML5
+- CSS3 & SCSS
+- JavaScript
+- React
+- Git
+- Redux
 
-In the project directory, you can run:
+## ✨ 공부 내용 메모
 
-### `yarn start`
+1. 액션(action): 상태에 어떠한 변화가 필요하면 액션이란 것이 발생한다. <br/>
+=> 변화를 일으켜야 할 때마다 액션 객체를 만들어야 하는데, 매번 액션 객체를 작성하기 번거롭고, 실수로 정보를 놓칠 수도 있다. 이러한 일을 방지하기 위해 이를 함수로 만들어서 관리한다.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+const changeInput = text => ({ 
+  type: 'CHANGE_INPUT',
+text
+});
 
-### `yarn test`
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. 리듀서(reducer): 액션을 만들어서 발생시키면, 리듀서가 현재 상태와 전달받은 액션 객체를 파라미터로 받아 오고, 두 값을 참고하여 새로운 상태를 만들어 반환한다.
 
-### `yarn build`
+```
+const initialState = {
+  counter: 1
+};
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+function reducer(state = initialState, action) {
+    switch (action.type) {
+      case INCREMENT:
+        return {
+            counter: state.counter + 1
+        };
+      default:
+        return state;
+    }
+}
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. 스토어(store): 프로젝트에 리덕스를 적용하기 위해 스토어를 만든다. 한 개의 프로젝트는 단 하나의 스토어만 가질 수 있으며, 스토어 안에는 현재 애플리케이션 상태와 리듀서가 들어가 있다.
 
-### `yarn eject`
+```
+import { createStore } from 'redux';
+import Reducer from './reducer';
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+const store = createStore(Reducer);
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+export default store;.
+```
+- 4. 디스패치(dispatch): 디스패치는 ‘액션을 발생시키는 것’이라고 이해하면 된다. 이 함수는 dispatch(action)과 같은 형태로 액션 객체를 파라미터로 넣어서 호출한다. 이 함수가 호출되면 스토어는 리듀서 함수를 실행시켜서 새로운 상태를 만들어 줍니다.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+```
+ const dispatch = useDispatch();
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  const handleChange = (e) => {
+    dispatch(actionSetAnswer(e.target.value, questionNUmber));
+  };
+```
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 📄 예시
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
