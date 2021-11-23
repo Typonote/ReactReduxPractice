@@ -2,7 +2,7 @@
 import React from "react";
 import "./scss/Counter.scss";
 
-const Counter = ({ number, onIncrease, onDecrease }) => {
+const Counter = React.memo(({ number, onIncrease, onDecrease }) => {
   return (
     <div className="Counter__Container">
       <h1>{number}</h1>
@@ -16,6 +16,6 @@ const Counter = ({ number, onIncrease, onDecrease }) => {
       </div>
     </div>
   );
-};
+});
 
 export default Counter;

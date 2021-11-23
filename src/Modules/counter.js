@@ -1,5 +1,7 @@
 // Counter 모듈
 
+import { createAction, handleActions } from "redux-actions";
+
 // Ducks 패턴을 사용하여 액션 타입, 액션 생성 함수, 리듀서를 작성한 코드를 ‘모듈’이라고 합니다
 
 // 1. 액션 타입 정의
@@ -9,8 +11,8 @@ const INCREASE = "counter/INCREASE";
 const DECREASE = "counter/DECREASE";
 
 // 2. 액션 생성 함수
-export const increase = () => ({ type: "INCREASE" });
-export const decrease = () => ({ type: "DECREASE" });
+export const increase = createAction(INCREASE);
+export const decrease = createAction(DECREASE);
 
 // 3. 초기 상태 지정
 
@@ -21,20 +23,13 @@ const initialState = {
 // 4. 리듀서 함수 생성
 // 리듀서 함수에는 현재 상태를 참조하여 새로운 객체를 생성해서 반환하는 코드를 작성.
 
-function counter(state = initialState, action) {
-  switch (action.type) {
-    case INCREASE:
-      return {
-        number: state.number + 1,
-      };
-    case DECREASE:
-      return {
-        number: state.number - 1,
-      };
-    default:
-      return state;
-  }
-}
+const counter = handleActions(
+  {
+    [INCREASE]: (state, action) => ({ number: state.number + 1 }),
+    [DECREASE]: (state, action) => ({ number: state.number - 1 }),
+  },
+  initialState
+);
 
 export default counter;
 

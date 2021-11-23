@@ -1,11 +1,11 @@
 import "./App.css";
-import Counter from "./Components/Counter";
 import Todos from "./Components/Todos";
+import CounterContainer from "./Containers/CounterContainer";
 
 function App() {
   return (
     <div className="App">
-      <Counter number={0} />
+      <CounterContainer />
       <hr />
       <Todos />
     </div>
