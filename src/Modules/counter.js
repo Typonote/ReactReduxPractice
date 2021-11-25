@@ -10,7 +10,7 @@ import { createAction, handleActions } from "redux-actions";
 const INCREASE = "counter/INCREASE";
 const DECREASE = "counter/DECREASE";
 
-// 2. 액션 생성 함수
+// 2. 액션 생성 함수 => createAction
 export const increase = createAction(INCREASE);
 export const decrease = createAction(DECREASE);
 
@@ -20,7 +20,7 @@ const initialState = {
   number: 0, // 초기 상태로 number 값을 설정
 };
 
-// 4. 리듀서 함수 생성
+// 4. 리듀서 함수 생성 => handleActions
 // 리듀서 함수에는 현재 상태를 참조하여 새로운 객체를 생성해서 반환하는 코드를 작성.
 
 const counter = handleActions(
