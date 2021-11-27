@@ -3,11 +3,7 @@
 
 ## 💻 기술 스택
 
-- HTML5
-- CSS3 & SCSS
-- JavaScript
 - React
-- Git
 - Redux
 
 ## ✨ 공부 내용 메모
